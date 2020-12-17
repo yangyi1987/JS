@@ -1,0 +1,51 @@
+Object.definePrototype 来实现 vue的响应式元素
+
+
+Object.keys(data).forEach(key=>{
+    Object.definePrototype(vm, key, {
+      configurable: true,
+      enumerable: true,
+      get(){
+        return data[key];
+      }
+      set(val){
+        if(data[key] === val) {
+          return;
+        }
+        data[key] = val;
+        // 更新 dom 中的数据 
+        document.querySelector("#app").textContent = data[key];
+      }
+    })
+})
+
+
+响应性过程
+
+1. 当传入 vue 实例中 data 的对象或者基本数据类型， data 中的 property 会被 vue 遍历后使用 Object.setProperty 转为 getter/ setter 访问器.
+2. data 中的 property 会被加到响应式系统中去
+
+
+3. component 组件实例中有自己的 data 对象
+3. 组件渲染在时候将会把 template 中的中使用到的 data 中的 property 记录到 watcher 中去。
+4. watcher 监听 data 中 property 的变化, 当用户操作 data 中的 property(调用 setter )发生变化时, watcher 通知 component 重新渲染,更新视图
+
+component --> data  --> watcher ---> component
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

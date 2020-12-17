@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Page Title</title>
+</head>
+
+<body>
+  <div id="app">
+    <a href="www.baidu.com">百度一下就知道</a>
+  </div>
+  <script>
+    document.querySelector('a').addEventListener('click', function (event) {
+      console.log(event.defaultPrevented)
+      if (event.target.nodeName === 'A') {
+        window.open(event.target.href)
+      }
+
+    })
+
+  </script>
+</body>
+
+</html>

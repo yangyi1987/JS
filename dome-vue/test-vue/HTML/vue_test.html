@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>vue的测试</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+  <div id="app" class="box1 box2 box3" v-bind:class="list">
+    <p v-text="age+1"></p>
+    <p v-html="h"> </p>
+    <p>{{ name }}</p>
+  </div>
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        name: "张三",
+        url: 'https://www.baidu.com',
+        age: 23,
+        h: '<h2>{{name}}</h2>',
+        list: {
+          'bboj': true,
+          obj: true
+        },
+        array: []
+      },
+      computed: {
+        myName: function () {
+          return this.name;
+        }
+      }
+    })
+    Vue.set(vm.list, "name", "aaaa")
+    Vue.delete(vm.list, 'name')
+    Vue.set(vm.array, 0, '我是array中的第一个元素')
+  </script>
+</body>
+
+</html>

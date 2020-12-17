@@ -1,0 +1,35 @@
+<html>
+
+<head>
+  <title> 测试</title>
+</head>
+
+<body>
+  <div class="id">777777</div>
+  <div class="one">
+    <d> oooooo</d>
+    79789
+    <i> 0000</i>
+  </div>
+  <script>
+    document.addEventListener('copy', function (event) {
+      console.log(event)
+      console.log(event.type)
+      event.preventDefault()
+      event.stopPropagation()
+    })
+    document.addEventListener('click', function (event) {
+      console.log(event)
+    })
+
+    document.addEventListener('mousemove', function (event) {
+      // if (event.target.tagName === 'DIV') {
+      console.log(event.target.tagName)
+      console.log(event)
+      // }
+    })
+
+  </script>
+</body>
+
+</html>

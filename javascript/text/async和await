@@ -1,0 +1,31 @@
+
+
+async 指令用与生命返回一个 Promise 对象的函数
+
+1.
+async 声明的函数将返回一个 resolve 状态的 Promise 对象
+2.
+async 可以使用 try{}.catch() 处理 函数中的 异常
+3.
+async 隐式 return Promise.resolve();
+4.
+async function getName() {} 等价于
+
+function  getName () {
+  return Promise.resolve()
+}
+5.
+async function getName(){}  中 Promise.resolve() 没有返回值是将默认 undefined
+
+await
+1.
+await 必须与 async 一起使用,
+2.
+await 可以等待 一个异步函数的 返回结果 也可以等待表达式的结果
+3.
+await 是等待一个结果,如果没有等到将会一直等待,直到报错
+4.
+ await 等待结果并且会阻塞 await 之后得代码, 当 await 等到了结果才会执行后面的代码
+5.
+  await 和 async 可以直接获得 Promise 的结果 不需要 .then，
+  当多个 Promise 对象是我可以在一个 async 声明的函数去处理 他们放返回的结果, 不需要写对个函数处理,或使用 .then 链照成繁琐的代码

@@ -1,0 +1,32 @@
+<div v-bind:[name]="url"></div>
+
+
+// 1. 可以动态获取 data 中的属性作为动态参数, 通过 v-bind去给元素的该属性绑定一个 url 参数
+data = {
+  name: 'name'
+  url: 'xxxxx'
+}
+
+
+// 2. 可以通过 computed 计算属性来技术一个动态的值作为 动态参数,
+computed: {
+  get name: {
+    return 'name'
+  }
+}
+
+// 3. 动态绑定一个表达式 v-bind[表达式] 
+
+
+v-on 监听也是可以绑定一个动态参数的
+
+v-on[eventName] = function(){}
+
+date:{
+  name: 'click'
+}
+v-on[name] = function(event){
+  console.log(event.name)
+}
+
+

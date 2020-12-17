@@ -1,0 +1,66 @@
+
+
+绑定 Html 的 class 
+:class 中的的 状态 成立时， className 加入到元素的 classList 中，
+
+:class 使用方式
+1. 可以绑定多个 class
+<p :class="{'className': active, className2: active2}"> </p>
+
+编译
+<p class="className className2"> </p>
+
+2.对象形式绑定
+<p v-bind:class="Object}"> </p>
+
+data : {
+  Object: {
+    'className': true || false,
+    className: true || false,
+  }
+}
+
+编译后
+<p class="className className2"> </p>
+
+3. 数组形式绑定
+<p v-bind:class="['className','className2']"> </p>
+编译后
+<p class="className className2"> </p>
+
+4.:class 传入的对象和数组都中都支持 简单的表达式
+
+
+5. <my-component class="baz boo"></my-component> 用在组件上会被渲染到组件中的第一个元素
+
+
+
+v-bind:style 用来动态绑定行内样式的
+
+
+// 方式一
+1. b-bind:style="{color: activeColor; , fontSize: fontSize + 'px'}"
+
+data = {
+  activeColor: 'red',
+  fontSize: 19
+}
+
+// 方式二
+
+2. v-bind:style="object"
+
+data = {
+  object: {
+    color: 'red',
+    fontSize: '23px'
+  }
+}
+
+
+3. v-bind-style 会自动给需要加前缀的样式添加前缀
+
+
+4. v-bind:style 支持css 属性有多重参数, 这样写会的得到最后一个被浏览器支持的 样式属性值
+
+v-bind:style="{dispaly: ['flex', '-webkit-box','-ms-flexbox']}" 

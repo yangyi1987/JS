@@ -1,0 +1,13 @@
+// 具名查插槽 slot 
+<slot name="header"></slot> 具名插槽
+<slot> </slot>  匿名插槽
+
+插槽动态绑定值
+  slot:=[name]
+# 代替 slot
+slot="name"   等价  #name
+
+
+v-slot 在 2.6 中已经被废弃
+
+slot-scope 作用域插槽

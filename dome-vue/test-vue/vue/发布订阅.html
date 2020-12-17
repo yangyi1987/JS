@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>发布订阅模式</title>
+</head>
+
+<body>
+  <div id='app'></div>
+  <script>
+    class EventEmitter {
+      constructor() {
+        // {'click': [fn, fn1], 'change': [fn,fn2]}
+        this.subs = {}
+      }
+      // 注册事件
+      $on(name, handle) {
+        this.subs[name] = this.subs[name] || [];
+        this.subs[name].push(handle)
+      }
+      // 触发事件
+      $emit(name) {
+        if (this.subs[name]) {
+          this.subs[name].forEach(handle => {
+            handle();
+          })
+        }
+      }
+    }
+    let eventEmitter = new EventEmitter();
+    function ok() {
+      console.log(11)
+    };
+    eventEmitter.$on('click', ok);
+    eventEmitter.$emit('click');
+  </script>
+
+</body>
+
+
+</html>

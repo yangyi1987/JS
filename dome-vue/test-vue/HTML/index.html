@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>vue2.x中的响应式原理</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script>
+    let data = {
+      msg: 'vue2.x 响应原理'
+    };
+    document.querySelector('#app').textContent = data.msg
+    let vm = {}
+    Object.defineProperty(vm, 'msg', {
+      enumerable: true,
+      configurable: true,
+      get() {
+        console.log('get', data.msg)
+        return data.msg;
+      },
+      set(val) {
+        console.log('set', val);
+        if (val === data.msg) { return; }
+        data.msg = val;
+        console.log(data.msg)
+        // 修改 dom 元素中的 textContent
+        document.querySelector('#app').textContent = data.msg
+      }
+    })
+
+  </script>
+</body>
+
+</html>

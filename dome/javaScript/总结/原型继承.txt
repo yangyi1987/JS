@@ -1,0 +1,96 @@
+                                祖父
+                              /
+                          爷爷  ------   奶奶   
+                        /
+                      爸爸 -----  妈妈
+                    /
+                  儿子  ----    老婆  
+                /
+              孙子
+
+  一. prototype 原型与继承
+    1 . 分析继承
+        继承在js中其实就是， 对象继承父对象的属性和方法，但对象调用本身不存在的值时就会先继承的父对象中去找。
+        如上举例： 孙子继承了儿子的基因，儿子继承了爸爸的基因，爸爸继承了爷爷的基因 爷爷继承了 祖父的基因这时孙子也就继承了爷爷的基因。 (用于之后得原型链)
+
+    2.prototype 叫原型， 每一个对象都存在创建它的原型， 原型就像工厂中的模具， 通过模具去3d 打印成一个实体，这个实体就存在了模具的特征。
+
+    3. 对象__proto__ 叫隐式原型，是早期js 留下来的，_proto__ 指向创建对象的原型（类似模具）， __proto__ ----> Object.prototype
+
+      举例：1. let obj = {} 这时 obj.__proto__ === Object.prototype 可以把 obj 理解成 let obj =  new Object() , Object 作为 obj 的原型
+           2. function getName()   这时 getName 是一个函数也是一个对象， 这时 getName的 __proto__ 指向创建它的对象的原型 它的原型是 Function.prototype
+           function getName() 可以看成是 new Function(....) 创建的函数， 这时 Functin 就是 getName 的模板， getName 继承 Function 中的属性和方法
+           分析： 
+              如上举例1 ojb 的原型是 Object.prototype 这时 obj继承了Object中的属性，并且也可以添加自己的属性
+
+    4.new F() 中的原型
+      let f = new F()  f.__proto__ === F.prototype
+      let obj = new Object();
+      function getName();
+    5. 记住只有函数才有 prototype , 一般的对象就只有__proto__ , 4 中的 f有 prototype, obj没有，getName() 也有protype, 
+       注意： 为什么 对象就没有 prototype ，而函数就有， 这里看js 考虑的是用户会把函数当做构造函数去使用，而 obj对象类型就不能当做构造函数去用。
+       function getName();          // 创建函数
+       let obj2 = new getName();    // 当构造函数去用 这时 obj2的__proto__ 指向 getName 的 prototype，当getName函数的 prototype 设置属性时，
+       obj2就继承它
+       比如： 
+          getName.prototype.name = "张三"
+          getName.prototype.age = 23
+          这时 obj2中没有 name 和 age 我们通过 obj2 去调用 name 和 age 时。
+          console.log( obj2.name )  // 张三
+          console.log( obj2.age )   // 23
+          分析： obj2 对象中是空的啊没有 name 和 age 啊， 为什么有值， 由于继承 js 会在 obj 中去查找 name 和 age 的值 不存在就会去继承的 prototype 中找
+          找但就返回，
+    6. js 中个种对象的原型 prototype
+        //     实例对象        原型                   
+       普通对象 {}(object) 原型为 Object
+       时间对象 date 原型为 Data   
+       错误对象 error 原型为 Error 
+       Map     map   原型为 Map 
+       Set     set   原型为 Set
+       Array   array 原型为 Array
+       .,..还有好几个对象，这里就自己测 
+    7.对象中的__proto__是早期js 留下来的你可以通过 Object.getPrototypeOf(obj) 获取对象的原型
+    8.class 中也存在 prototype 原型继承这里就这时不说了，有需要自己百度一下
+
+二. 原型链
+  理解： 原型链其实就是说是原型中的原型，当原型中的原型中的原型中的原型时有很多个原型这样就成了原型链， 就行开头中的 孙子到 祖父想成了一条链
+  MDN中解释的原型链： 每个实例对象（ object ）都有一个私有属性（称之为 __proto__ ）指向它的构造函数的原型对象（prototype ）。
+        该原型对象也有一个自己的原型对象( __proto__ ) ，层层向上直到一个对象的原型对象为 null。根据定义，null 没有原型，并作为这个原型链中的最后一个环节
+  举例：  function getName();
+         let f = new  getName();
+        分析： f.__proto__ ---> getName.prototype
+              getName.__proto__ ----> Functin.prototype
+              由于 js 完事物都都是对象， 所以 Function 对象中的 __proto__ -----> Object.prototype
+              而 Object 中也有 __proto__ , 那指向谁呢，由于完事物都都是对象，对象就是最顶层的了，
+              可以这样理解
+                                                                            null
+                                                                            ^
+                                                                            |
+                                                  Object.prototype， Object.__proto__
+                                                        ^
+                                                        |
+                          Function.prototype ,Function.__proto__
+                                              ^
+                                              |
+                  getName.prototype,getName.__proto__
+                      ^
+                      |
+              f.__proto__
+              
+    f 是一个对象是 getName的实例对象， getName 也是 Function  的实例对象(函数)， Function中的protype的 __proto__ 指向 Object ， prototype其实是一个对象。
+    代码测试： 
+          f.__proto__ === getName.prototype         // true
+          getName.__proto__ === Function.prototype  // true
+          Function.prototype.__proto__ === Object.prototype   // true
+          Object.__proto__ === null   // true 
+    
+    在js 中的各种对象原型中差不多都会有 toString, valueOf 两个方法,这两个方法就是通过原型链从 Object 的原型中继承下来的，这两个方法在有的对象中被重写了。
+
+
+
+
+
+
+          
+
+                              

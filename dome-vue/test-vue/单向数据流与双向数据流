@@ -1,0 +1,27 @@
+单向数据流( Props ) 模型改变视图
+Model ------> view 
+
+
+双向数据流  v-model 模型改变视图， 视图改变模型
+Model -------> view
+Model <------- view
+
+####  组件中实现数据双向绑定的方法
+1.
+定义组件上使用 v-model 等价于      v-bind:value="value" 和 v-on:input="$emit('input', $event.target.value)"
+这样实现了双向数据绑定  
+Model -------> view
+Model <------- view
+
+2.
+v-bind.value.sync 实现双向数据绑定(数据同步),当 view 中视图改变而改变了 model时 value 不需要手动改变, 它将自动同步
+
+3.
+实现数据数据绑定, 和.sync 的效果一样
+父
+v-bind:value
+@update::value="value==$event
+子
+this.$emit("update::value")
+
+

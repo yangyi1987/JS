@@ -1,0 +1,22 @@
+{
+  "name": "vue-ts",
+  "version": "1.0.0",
+  "description": "vue + ts + vuex",
+  "main": "y",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit",
+    "start": "webpack-dev-server  --open --hot"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "vue": "^2.6.11"
+  }
+}

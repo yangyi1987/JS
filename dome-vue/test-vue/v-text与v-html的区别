@@ -1,0 +1,19 @@
+
+//- v-text 
+-text 被解析成为一个 text 的文本节点
+v-text 绑定的 value 不管值什么都只会被视为 字符窜
+v-text 与 {{}} 的相关是一样的
+v-text 与 {{}} 中支持单行表达式, 并将表达式的结果作为内容显示
+v-text 与 {{ }} 其实是更新元素的 textContent 
+v-text 与 {{}} 只能输出文本, 并不能输出 HTML
+
+
+//- v-html
+v-html 可以被解析成为一个 text 问本节点也可以不被解析 html 标签
+v-html 更新的是元素的 innerHTML, 内容按 HTML 插入,
+v-html 能输出 HTML 及 文本
+v-html="value" 是 value 中的 HTML内容不会不被 Vue 解析编译
+例如：
+  <p v-html="<h2>{{name}}</h2>"></p>
+  
+  <h2> 标签中的内容不会不被 Vue 解析编译,所以是 显示的是 {{name}} 字符串

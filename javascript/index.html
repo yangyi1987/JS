@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<style>
+  /* * {
+    padding: 50px 50px;
+  } */
+
+  #app {
+    width: 500px;
+    border: 1px solid transparent;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 40px solid #C6260A;
+  }
+
+  #left {
+    width: 0px;
+    height: 191px;
+    border-top: 150px solid red;
+    border-left: 40px solid transparent;
+  }
+
+  #right {
+    width: 0px;
+    height: 191px;
+    border-top: 150px solid red;
+    border-right: 50px solid transparent;
+  }
+
+
+  #content {
+    width: 600px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  #center {
+    display: flex;
+    flex: 1;
+    border-top: 30px solid #E1B7BE;
+    border-right: 15px solid #E1B7BE;
+    border-left: 15px solid #E1B7BE;
+    border-bottom: 15px solid #E1B7BE;
+
+  }
+
+  #title {
+    position: fixed;
+    top: 15px;
+    left: 200px;
+    width: 234px;
+    height: 70px;
+    background: #C6260A;
+    font-size: 36px;
+    font-weight: 600;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 70px;
+  }
+
+  #apps {
+    padding: 20px
+  }
+
+  #text {
+    width: 200px;
+    /* height: 139px; */
+    font-size: 50px;
+    font-family: PingFangSC-Semibold, PingFang SC;
+    font-weight: 600;
+    color: #3D3D3D;
+    /* line-height: 139px; */
+    letter-spacing: 1px;
+    text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
+    /* border: 1px solid #3333; */
+    margin: 30px auto;
+  }
+</style>
+
+<body>
+  <div id="apps">
+    <div id="title">抽取编号</div>
+    <div id="app"></div>
+    <div id="content">
+      <div id="left"></div>
+      <div id="center">
+        <div id="text">2020001</div>
+      </div>
+      <div id='right'></div>
+    </div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<html>
+
+<head>
+  <title>vue2.x响应式原理</title>
+</head>
+
+<body>
+  <div id="app">
+    <div class="name"></div>
+    <div class="age"></div>
+  </div>
+  <script>
+    /**
+     * 
+     * object.Prototype 模仿 vue2.x 响应式原理
+     * 
+     */
+    // 模仿 vue  data 对象
+    let data = {
+      name: '张三',
+      age: 34
+    }
+    // 模仿 vue vm 实例对象
+    let vm = {}
+
+    document.querySelector("#app").textContent = data.name
+
+    proxyData(data);
+
+    // Object.definePrototype 模仿 vue2.x 的响应式原理
+    function proxyData(data) {
+      Object.keys(data).forEach(item => {
+        // 给 vm 对象添加属性
+        Object.defineProperty(vm, item, {
+          configurable: true,
+          enumerable: true,
+          get() {
+            // vm 获取属性 value
+            return data[item];
+          },
+          set(val) {
+            // value 相同时就不修改
+            if (data[item] === val) {
+              return;
+            }
+            // 更新 data 中的属性 value 
+            data[item] = val;
+            // 更新 DOM 元素中的 value
+            document.querySelector('#app').textContent = data[item];
+          }
+        })
+      })
+    }
+  </script>
+</body>
+
+</html>

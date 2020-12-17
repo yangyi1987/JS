@@ -1,0 +1,32 @@
+1. new Vue() 
+// 创建 vue 实例阶段
+2. beforeCreate(vue 实例被创建前) 此时 data observer(数据观测), watcher, methods,computed 都是还没有初始化, 占时不可使用
+| 过程
+| 实现 data observer, computed, watcher, methods,
+| 创建
+|
+3. Create(vue 实例被创建后) data observer, computed, watcher, methods, 中的 property 都已经可以访问和使用, 但还并不可以操作 dom
+
+// 挂载阶段
+4. beforeMounted (vue 实例被挂载之前) 挂载之前实现实例 template 模板的导入渲染函数 render 中去编译, 虚拟 Dom 已经被创建完成, 即将开始渲染, 改阶段可以改变数据但不会调用 update 函数
+| 过程
+| 执行到这个钩子的时候，在内存中已经编译好了模板了，但是还没有挂载到页面中，此时，页面还是旧的
+| 挂载 el property 可被访问
+|
+5. mounted (vue 被挂载之后) 真实 dom 挂载完成, 完成双向数据绑定,  可以操作和访问 Dom 
+
+// 运行阶段
+6. beforeUpdate (数据更新之前)  数据更新之前, 虚拟 dom 重新渲染之前, 响应式数据发生更新前, computed 重新计算, watcher
+| 过程：
+| 数据更新, 虚拟 dom 重新渲染, 响应式数据更新, computed 计算, watcher
+|
+|
+7. update (数据更新之后)  数据更新完成, 虚拟 dom 重新渲染完成, 响应式数据更新完成, computed 重新计算完成, watcher 完成
+
+// 销毁阶段--
+8. beforeDestroy (vue 实例在销毁之前) vue 实例销毁之前
+|
+|
+|
+|
+9. destroyed (vue 实例在销毁之后) vue 实例销毁之后

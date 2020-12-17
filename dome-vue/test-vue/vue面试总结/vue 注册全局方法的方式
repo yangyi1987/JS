@@ -1,0 +1,54 @@
+vue 注册全局方法的方式
+
+一. Vue.prototype[method] = method 
+
+二.Vue.use()  
+  Vue.use(MyPlugin, { someOption: true })
+  MyPlugin.install = function(Vue, options) {
+    Vue.prototype[method] = method
+  }
+
+三. 订阅模式(可以在任意一个 .vue 文件注册全局函数)
+  // 注册函数
+  this.$root.$on('test', function(){})
+  // 注销函数
+  this.$root.$off('test')
+  // 调用函数
+  this.$root.$emit('test')
+
+
+四. 手写发布订阅模式
+class subscription {
+  constructor() {
+    this.cache = {}
+  }
+
+  // 注册事件
+ $on(name, f) {
+    this.cache[name] = this.cache[name] || [];
+    this.cache[name].push(f);
+ }
+
+ // 注销事件
+ $off(name) {
+   if(this.cache[name]) {
+     delete this.cache[name];
+   }
+ }
+
+// 调用函数
+ $emit(name) {
+   if(this.cache[name]) {
+     Object.values(this.cache[name]).forEach(handle=>{
+       handle();
+     })
+   }
+ }
+}
+
+let s = new subscription()
+
+s.$on('test', function() {console.log('name')})
+s.$off('test')
+s.$emit('test')
+

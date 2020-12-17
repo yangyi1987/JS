@@ -1,0 +1,83 @@
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <p class="a b" id="name">{{ message }}</p>
+    <span class="a" id='name'>99999</span>>
+    <span>{{user.name}}</span>
+    <input type="text" v-model="value" />
+    <p v-html="school"></p>
+    <Com1></Com1>
+  </div>
+  <script>
+    let user = {
+      name: "张三",
+      age: 23,
+    };
+    user.name = "李四";
+    // 创建一个 vue
+    Vue.component("Com1", {
+      template: "<div>  我是一个组件</div>",
+    });
+    let app = new Vue({
+      el: "#app",
+      data: {
+        value: "1234",
+        time: 0,
+        message: new Date().toLocaleString(),
+        user: user,
+        school: "<a href> 我是一个a 标签</a>",
+        list: [
+          {
+            value: 1,
+          },
+          {
+            value: 2,
+          },
+          {
+            value: 3,
+          },
+        ],
+        user: {
+          name: "张三",
+          age: 34,
+        },
+      },
+      // 数据监听
+      watch: {
+        // 侦听器 + 节流 限制多次请求触发
+        value: function (val) {
+          if (this.time) {
+            clearTimeout(this.time);
+          }
+          this.time = setTimeout(function () {
+            console.log(val);
+          }, 3000);
+        },
+      },
+      beforeCreated() {
+        console.log('init  后')
+        console.log(this.value);
+        console.log("vue 实例创建以前");
+      },
+      created() {
+        console.log()
+      },
+      beforeUpdate() {
+        console.log("数据更新前");
+      },
+      update() {
+        console.log("数据更新后");
+      },
+    });
+    // app 是一个 vue 实例
+    // console.log(app);
+    console.log(app.user);
+  </script>
+</body>
+
+</html>

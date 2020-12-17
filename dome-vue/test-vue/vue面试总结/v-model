@@ -1,0 +1,15 @@
+v-model 双向数据绑定的语法糖为 :value="value" 和  @change="e=>e.target.value"
+v-model 默认监听 @change 事件
+
+一. 双向数据绑定
+<input  v-model="value" />  等价于  <input v-bind="value" @change="e=>e.target.value"/>
+
+二. 双向数据绑定
+v-bind:value.sync (实现 v-model 效果) 等价于 :value="value" , @change="e=>e.target.value"
+
+
+三. 双向数据绑定
+this.$emit('update:title', newTitle)   <span v-bind:title="doc.title" v-on:update:title="doc.title = $event"></span>
+
+
+v-model 的原理:  :value="value" 和  @change="e=>e.target.value"

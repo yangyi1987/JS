@@ -1,0 +1,1 @@
+.prevent 等于 event.preventDefault()
